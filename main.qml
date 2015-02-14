@@ -3,11 +3,29 @@ import QtQuick.Controls 1.3
 import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 
+import "modules/login"
+
 ApplicationWindow {
-    title: qsTr("Hello World")
+    id: app
+
+    property string appId: "4782178"
+    property string token
+
+    property string permissions: "audio"
+
+    title: qsTr("VK Music")
     width: 640
     height: 480
     visible: true
+
+    SystemPalette {
+        id: palette
+        colorGroup: SystemPalette.Active
+    }
+
+    Login {
+        anchors.fill: parent
+    }
 
     menuBar: MenuBar {
         Menu {
@@ -21,13 +39,6 @@ ApplicationWindow {
                 onTriggered: Qt.quit();
             }
         }
-    }
-
-    MainForm {
-        anchors.fill: parent
-        button1.onClicked: messageDialog.show(qsTr("Button 1 pressed"))
-        button2.onClicked: messageDialog.show(qsTr("Button 2 pressed"))
-        button3.onClicked: messageDialog.show(qsTr("Button 3 pressed"))
     }
 
     MessageDialog {

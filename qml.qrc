@@ -1,6 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>MainForm.ui.qml</file>
+        <file>js/URLQuery.js</file>
+        <file>js/XHR.js</file>
+        <file>modules/login/Login.qml</file>
+        <file>modules/login/LoginWindow.qml</file>
     </qresource>
 </RCC>

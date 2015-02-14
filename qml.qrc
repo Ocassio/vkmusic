@@ -6,5 +6,7 @@
         <file>modules/login/Login.qml</file>
         <file>modules/login/LoginWindow.qml</file>
         <file>modules/player/Player.qml</file>
+        <file>modules/player/Tracklist.qml</file>
+        <file>modules/player/Controls.qml</file>
     </qresource>
 </RCC>

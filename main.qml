@@ -4,6 +4,7 @@ import QtQuick.Window 2.2
 import QtQuick.Dialogs 1.2
 
 import "modules/login"
+import "modules/player"
 
 ApplicationWindow {
     id: app
@@ -12,6 +13,8 @@ ApplicationWindow {
     property string token
 
     property string permissions: "audio"
+
+    property string userId
 
     title: qsTr("VK Music")
     width: 640
@@ -24,30 +27,22 @@ ApplicationWindow {
     }
 
     Login {
+        id: loginForm
         anchors.fill: parent
+        visible: true
+
+        onSucceeded: onLogin()
     }
 
-    menuBar: MenuBar {
-        Menu {
-            title: qsTr("&File")
-            MenuItem {
-                text: qsTr("&Open")
-                onTriggered: messageDialog.show(qsTr("Open action triggered"));
-            }
-            MenuItem {
-                text: qsTr("E&xit")
-                onTriggered: Qt.quit();
-            }
-        }
+    Player {
+        id: player
+        anchors.fill: parent
+        visible: false
     }
 
-    MessageDialog {
-        id: messageDialog
-        title: qsTr("May I have your attention, please?")
-
-        function show(caption) {
-            messageDialog.text = caption;
-            messageDialog.open();
-        }
+    function onLogin() {
+        loginForm.visible = false;
+        player.visible = true;
+        player.initialize();
     }
 }

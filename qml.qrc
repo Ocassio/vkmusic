@@ -5,5 +5,6 @@
         <file>js/XHR.js</file>
         <file>modules/login/Login.qml</file>
         <file>modules/login/LoginWindow.qml</file>
+        <file>modules/player/Player.qml</file>
     </qresource>
 </RCC>

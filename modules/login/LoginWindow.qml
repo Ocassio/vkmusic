@@ -16,7 +16,7 @@ Window {
     property string permissions
     property var finishRegExp: /^https:\/\/oauth.vk.com\/blank.html/
 
-    signal succeeded(string token)
+    signal succeeded(string token, string userId)
     signal failed(string error)
 
     function login() {
@@ -67,7 +67,7 @@ Window {
                 return
             }
 
-            succeeded(result.access_token);
+            succeeded(result.access_token, result.user_id);
             return;
         }
     }

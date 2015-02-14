@@ -49,9 +49,11 @@ Rectangle {
         }
     }
 
-    function onLoginSuccess(token) {
+    function onLoginSuccess(token, userId) {
         app.token = token;
+        app.userId = userId;
         loginWindow.destroy();
+        succeeded();
     }
 
     function onLoginFailure(error) {
@@ -66,7 +68,7 @@ Rectangle {
         appId: app.appId
         permissions: app.permissions
 
-        onSucceeded: onLoginSuccess(token)
+        onSucceeded: onLoginSuccess(token, userId)
         onFailed: onLoginFailure(error)
     }
 }

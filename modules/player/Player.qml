@@ -9,6 +9,7 @@ Rectangle {
     id: player
 
     property var tracks
+    property int currentTrack
 
     function initialize() {
         getTracks();
@@ -18,7 +19,7 @@ Rectangle {
         var params = {
             access_token: app.token,
             owner_id: app.userId,
-            count: 10
+            count: 50
         }
 
         function callback(request) {
@@ -27,8 +28,8 @@ Rectangle {
                 if (result.error) {
                     console.log("Error:", result.error.error_code, result.error.error_msg);
                 } else {
+                    result.response.splice(0, 1);
                     player.tracks = result.response;
-                    play(4);
                 }
             } else {
                 console.log("HTTP", request.status, request.statusText);
@@ -40,13 +41,28 @@ Rectangle {
 
     function play(trackNum) {
         if (tracks[trackNum]) {
+            player.currentTrack = trackNum;
             mediaPlayer.source = tracks[trackNum].url;
             mediaPlayer.play();
         }
     }
 
+    function playNext() {
+        if (player.currentTrack < player.tracks.length - 1) {
+            play(player.currentTrack + 1);
+        } else {
+            play(0);
+        }
+    }
+
     MediaPlayer {
         id: mediaPlayer
+
+        onStatusChanged: {
+            if (status === MediaPlayer.EndOfMedia) {
+                player.playNext();
+            }
+        }
     }
 
     Column {
@@ -54,9 +70,12 @@ Rectangle {
 
         Tracklist {
             id: tracklist
+            tracks: player.tracks
 
             height: parent.height - controls.height
             width: parent.width
+
+            onTrackSelected: play(trackNum)
         }
 
         Controls {

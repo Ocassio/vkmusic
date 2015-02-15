@@ -16,7 +16,7 @@ ApplicationWindow {
 
     property string userId
 
-    title: qsTr("VK Music")
+    title: "VKMusic"
     width: 640
     height: 480
     visible: true
